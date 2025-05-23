@@ -4,12 +4,17 @@ import type { ContentfulStatusCode } from "hono/utils/http-status";
 
 export function errorHandler(error: unknown): Response {
   let httpException: HTTPException;
+  // Erro thrown by got
   if (error instanceof HTTPError) {
     console.log(error.request.requestUrl);
     const status = error.response?.statusCode ?? 500;
     httpException = new HTTPException(status as ContentfulStatusCode, {
       message: error.message,
     });
+    // Error thrown by Hono
+  } else if (error instanceof HTTPException) {
+    httpException = error;
+    // Other errors
   } else {
     httpException = new HTTPException(500, {
       message: "Internal Server Error",

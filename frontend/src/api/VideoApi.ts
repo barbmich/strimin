@@ -1,5 +1,5 @@
 import { httpClient } from "./client";
-import { videosResponseSchema } from "./types";
+import { singleVideoResponseSchema, videosResponseSchema } from "./types";
 
 export class VideoApi {
   static async getVideos({ pageParam = 1 }) {
@@ -7,5 +7,13 @@ export class VideoApi {
     return videosResponseSchema.parse(data, {
       error: () => ({ message: "A schema error happened" }),
     });
+  }
+
+  static async getVideo(id: number) {
+    const data = await httpClient.get("videos/" + id).json();
+    const parsedData = singleVideoResponseSchema.parse(data, {
+      error: () => ({ message: "A schema error happened" }),
+    });
+    return parsedData.hits[0];
   }
 }

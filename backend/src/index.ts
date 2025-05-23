@@ -23,10 +23,9 @@ await initDb();
 app.use("*", cors());
 
 app.route("/api", api);
-app.get("/health", (c) => {
-  return c.body(null);
-});
 
+// Global error handler. This could be also done on a router level to handle
+// errors specific to a third party API interaction.
 app.onError((error, c) => errorHandler(error));
 
 serve(

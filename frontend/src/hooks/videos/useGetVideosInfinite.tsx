@@ -19,6 +19,5 @@ export default function useGetVideosInfinite() {
     queryKey: ["videos"],
     initialPageParam: 1,
     getNextPageParam,
-    staleTime: 1000,
   });
 }
