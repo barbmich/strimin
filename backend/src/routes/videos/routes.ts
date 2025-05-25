@@ -18,10 +18,10 @@ const httpClient = getHttpClient({
 export function getVideoRouter() {
   const videoRoutes = new Hono();
   videoRoutes.get("/", async (c) => {
-    const { page = "1" } = c.req.query();
+    const { page = "1", q = "" } = c.req.query();
 
     const res = await httpClient.get("videos", {
-      searchParams: { page },
+      searchParams: { page, q },
     });
 
     return c.json(res.body);

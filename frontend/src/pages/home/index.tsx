@@ -2,13 +2,13 @@ import ErrorMessage from "../../components/Error";
 import useGetVideosInfinite from "../../hooks/videos/useGetVideosInfinite";
 import NoData from "../../components/NoData";
 import { ThumbnailCard } from "./Card";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Loading from "../../components/Loading";
-import { useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { SEARCH_QUERY_PARAM } from "../../constants";
 
 export default function Home() {
-  const queryClient = useQueryClient();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get(SEARCH_QUERY_PARAM) || "";
   const {
     data,
     error,
@@ -16,17 +16,7 @@ export default function Home() {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useGetVideosInfinite();
-
-  const hits = data?.pages.flatMap((page) => page.hits);
-
-  useEffect(() => {
-    if (!hits) return;
-
-    hits.forEach((v) => {
-      queryClient.setQueryData(["video", v.id], v);
-    });
-  }, [hits, queryClient]);
+  } = useGetVideosInfinite(searchQuery);
 
   function handleScroll(e: React.UIEvent<HTMLDivElement, UIEvent>) {
     const target = e.target as HTMLElement;
