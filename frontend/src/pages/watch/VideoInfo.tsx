@@ -2,6 +2,7 @@ import { ThumbsUp, ThumbsDown, Share, Download } from "lucide-react";
 import { Button } from "../../components/Button";
 import type { VideoInformation } from "../../api/types";
 import { ChannelInfo } from "./ChannelInfo";
+import { HeadingOne } from "../../components/Heading";
 
 function VideoStats({ data }: { data: VideoInformation }) {
   return (
@@ -36,7 +37,7 @@ function VideoStats({ data }: { data: VideoInformation }) {
 export function VideoInfo({ data }: { data: VideoInformation }) {
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-semibold leading-tight">abababa</h1>
+      <HeadingOne>This is a title</HeadingOne>
       <VideoStats data={data} />
       <ChannelInfo data={data} />
       {/* Description */}

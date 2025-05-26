@@ -1,6 +1,6 @@
 import z from "zod/v4";
 
-export const VideoInformationSchema = z.object({
+export const videoInformationSchema = z.object({
   id: z.number(),
   duration: z.number(),
   videos: z.object({
@@ -14,17 +14,28 @@ export const VideoInformationSchema = z.object({
   comments: z.number(),
   downloads: z.number(),
   user: z.string(),
+  user_id: z.number(),
   userImageURL: z.string(),
 });
-export type VideoInformation = z.infer<typeof VideoInformationSchema>;
+export type VideoInformation = z.infer<typeof videoInformationSchema>;
 
 export const videosResponseSchema = z.object({
   totalHits: z.number(),
-  hits: z.array(VideoInformationSchema),
+  hits: z.array(videoInformationSchema),
 });
-export type GetVideosResponse = z.infer<typeof videosResponseSchema>;
 
 export const singleVideoResponseSchema = videosResponseSchema.refine(
   (data) => data.totalHits === 1 && data.hits.length === 1
 );
-export type GetSingleVideoResponse = z.infer<typeof singleVideoResponseSchema>;
+
+export const subscriptionSchema = z.object({
+  channelId: z.number(),
+});
+
+export const subscriptionsResponseSchema = z.object({
+  subscriptions: z.array(subscriptionSchema),
+});
+
+export const isSubscribedResponseSchema = z.object({
+  isSubscribed: z.boolean(),
+});

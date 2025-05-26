@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { getHttpClient } from "../../helpers.js";
 import { HTTPException } from "hono/http-exception";
+import type { AppContext } from "../../index.js";
 
 const httpClient = getHttpClient({
   prefixUrl: "https://pixabay.com/api",
@@ -15,8 +16,8 @@ const httpClient = getHttpClient({
   },
 });
 
-export function getVideoRouter() {
-  const videoRoutes = new Hono();
+export function getVideosRouter() {
+  const videoRoutes = new Hono<AppContext>();
   videoRoutes.get("/", async (c) => {
     const { page = "1", q = "" } = c.req.query();
 
@@ -33,6 +34,12 @@ export function getVideoRouter() {
     if (!id) {
       throw new HTTPException(400, {
         message: "ID is required",
+      });
+    }
+
+    if (isNaN(Number(id))) {
+      throw new HTTPException(400, {
+        message: "ID must be a number",
       });
     }
 

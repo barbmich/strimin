@@ -1,7 +1,15 @@
-import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
+import {
+  sqliteTable,
+  text,
+  primaryKey,
+  integer,
+} from "drizzle-orm/sqlite-core";
 
-export const users = sqliteTable("users", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name", { length: 255 }),
-  email: text("email"),
-});
+export const subscriptions = sqliteTable(
+  "subscriptions",
+  {
+    subscriberId: text("subscriber_id").notNull(),
+    channelId: integer("channel_id").notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.subscriberId, table.channelId] })]
+);

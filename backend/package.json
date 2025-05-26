@@ -2,14 +2,17 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "drizzle-kit push && tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "drizzle-kit push && node dist/index.js"
   },
   "dependencies": {
+    "@clerk/backend": "^1.33.0",
+    "@hono/clerk-auth": "^2.0.0",
     "@hono/node-server": "^1.14.2",
     "better-sqlite3": "^11.10.0",
     "dotenv": "^16.5.0",
+    "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.43.1",
     "got": "^14.4.7",
     "hono": "^4.7.10"

@@ -3,11 +3,11 @@ import {
   useQueryClient,
   type InfiniteData,
 } from "@tanstack/react-query";
-import type { GetVideosResponse } from "../../api/types";
+import type { VideosResponse } from "../../api/types";
 import { VideoApi } from "../../api/VideoApi";
 import { useEffect } from "react";
 
-function useSetVideoCache(data: InfiniteData<GetVideosResponse> | undefined) {
+function useSetVideoCache(data: InfiniteData<VideosResponse> | undefined) {
   const queryClient = useQueryClient();
   const hits = data?.pages.flatMap((page) => page.hits);
 
@@ -21,8 +21,8 @@ function useSetVideoCache(data: InfiniteData<GetVideosResponse> | undefined) {
 }
 
 function getNextPageParam(
-  lastPage: GetVideosResponse,
-  allPages: GetVideosResponse[]
+  lastPage: VideosResponse,
+  allPages: VideosResponse[]
 ) {
   const totalFetched = allPages.flatMap((p) => p.hits).length;
   if (totalFetched < lastPage.totalHits) {

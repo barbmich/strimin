@@ -6,7 +6,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { SEARCH_QUERY_PARAM } from "../../constants";
 
-export default function Home() {
+export default function HomePage() {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get(SEARCH_QUERY_PARAM) || "";
   const {
