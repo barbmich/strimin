@@ -13,10 +13,25 @@ export function ChannelInfo({ data }: { data: VideoInformation }) {
 
   function handleSubscriptionAction() {
     if (isLoading) return;
-    mutate({
-      id: data.user_id,
-      action: subscriptionData?.isSubscribed ? "unsubscribe" : "subscribe",
-    });
+
+    if (subscriptionData?.isSubscribed === true) {
+      // Very simplified confirmation logic
+      // In a real application, you might want to use a modal or a more user-friendly confirmation dialog
+      // This is just a basic example for destructive actions
+      const isConfirmed = window.confirm(
+        "Are you sure you want to unsubscribe?"
+      );
+      if (!isConfirmed) return;
+      return mutate({
+        id: data.user_id,
+        action: "unsubscribe",
+      });
+    } else {
+      return mutate({
+        id: data.user_id,
+        action: "subscribe",
+      });
+    }
   }
 
   return (

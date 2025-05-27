@@ -23,6 +23,7 @@ export const videosResponseSchema = z.object({
   totalHits: z.number(),
   hits: z.array(videoInformationSchema),
 });
+export type VideosResponse = z.infer<typeof videosResponseSchema>;
 
 export const singleVideoResponseSchema = videosResponseSchema.refine(
   (data) => data.totalHits === 1 && data.hits.length === 1

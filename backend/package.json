@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "drizzle-kit push && tsx watch src/index.ts",
     "build": "tsc",
-    "start": "drizzle-kit push && node dist/index.js"
+    "start": "drizzle-kit push && node dist/src/index.js"
   },
   "dependencies": {
     "@clerk/backend": "^1.33.0",

@@ -7,6 +7,7 @@ import { api } from "./routes/index.js";
 import { db } from "./db/index.js";
 import { errorHandler } from "./helpers.js";
 import * as schema from "./db/schema.js";
+import { logger } from "hono/logger";
 
 export interface AppContext {
   Variables: {
@@ -17,6 +18,8 @@ export interface AppContext {
 async function main() {
   try {
     const app = new Hono<AppContext>();
+
+    app.use(logger());
 
     // Attach db to context
     app.use("*", async (c, next) => {
