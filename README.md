@@ -68,7 +68,9 @@ I have a lot of regrets with the 3rd party API for the video sources:
 - Videos API parameters do not filter by user
 
 The backend is built with [Hono](https://hono.dev/) as it comes with a lot of functionalities built-in. It was a lot of fun working with it!
-If I had more time, I would've organized the backend better: controllers, services, repositories.
+I would've liked to add an API specification for the architecture shared above, but I was a bit tight time-wise. In production, I would implement the specification definition as code (for example, Hono itself has several middlewares made for this, f.e. [Zod OpenAPI](https://hono.dev/examples/zod-openapi)).
+
+If I had more time, I would've organized the backend better: controllers, services, repositories. I would've also liked to add schema validation for endpoints and 3rd party requests & responses, but due to time constraints these were only applied to frontend responses to verify all data received was as expected.
 I used sqlite because it's easy to use, it's supported by the orm I chose to use (drizzle) and it doesn't require additional setup to be ran locally.
 
 For some frontend styling implementation I made use of Vercel's v0 platform - just so that you don't think I'm a css wizard.
