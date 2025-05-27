@@ -4,6 +4,7 @@ import useGetSuggestedVideos from "../../hooks/videos/useGetSuggestedVideos";
 import ErrorMessage from "../../components/Error";
 import NoData from "../../components/NoData";
 import type { VideoInformation } from "../../api/types";
+import { formatDuration, formatViews } from "../../helpers";
 
 function ThumbnailSuggested({ videoData }: { videoData: VideoInformation }) {
   return (
@@ -17,7 +18,7 @@ function ThumbnailSuggested({ videoData }: { videoData: VideoInformation }) {
           className="rounded-lg object-cover w-full h-full"
         />
         <div className="absolute bottom-1 right-1 rounded bg-black bg-opacity-80 px-1 py-0.5 text-xs text-white">
-          {videoData.duration}
+          {formatDuration(videoData.duration)}
         </div>
       </div>
       <div className="min-w-0 flex-1">
@@ -25,7 +26,9 @@ function ThumbnailSuggested({ videoData }: { videoData: VideoInformation }) {
           {videoData.id}
         </h4>
         <p className="mt-1 text-xs text-gray-600">{videoData.user}</p>
-        <p className="text-xs text-gray-600">{videoData.views} views</p>
+        <p className="text-xs text-gray-600">
+          {formatViews(videoData.views)} views
+        </p>
       </div>
     </>
   );

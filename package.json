@@ -1,0 +1,27 @@
+{
+  "name": "strimin",
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install",
+    "build:all": "npm --prefix backend run build && npm --prefix frontend run build",
+    "start:frontend": "npm --prefix frontend run preview",
+    "start:backend": "npm --prefix backend run start",
+    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barbmich/strimin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/barbmich/strimin/issues"
+  },
+  "homepage": "https://github.com/barbmich/strimin#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
